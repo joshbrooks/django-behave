@@ -33,8 +33,6 @@ except ImportError:
     from django.db.models import get_app
 
 import unittest
-from django.utils import six
-from django.utils.six.moves import xrange
 from django.conf import settings
 
 from behave.configuration import Configuration, ConfigError, options
@@ -118,7 +116,7 @@ def parse_argv(argv, option_info):
     new_argv = ["behave", ]
     our_opts = {"browser": None}
 
-    for index in xrange(len(argv)):  # using range to have compatibility with Py3
+    for index in range(len(argv)):
         # If it's a behave option AND is the long version (starts with '--'),
         # then proceed to save the information.  If it's not a behave option
         # (which means it's most likely a Django test option), we ignore it.
@@ -148,7 +146,7 @@ class DjangoBehaveTestCase(LiveServerTestCase):
         return hash((type(self), self._testMethodName, self.features_dir))
 
     def get_features_dir(self):
-        if isinstance(self.features_dir, six.string_types):
+        if isinstance(self.features_dir, str):
             return [self.features_dir]
         return self.features_dir
 
